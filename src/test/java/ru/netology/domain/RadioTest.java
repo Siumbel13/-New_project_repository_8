@@ -1,6 +1,7 @@
 package ru.netology.domain;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -8,7 +9,7 @@ public class RadioTest {
 
     @ParameterizedTest
     @CsvSource({
-            "0, 1",
+            "0,1",
             "1,2",
             "8,9",
             "9,0"
@@ -20,7 +21,6 @@ public class RadioTest {
         rad.setNext();
 
         int actual = rad.getCurrentRadioStation();
-        //int expected = 0;
 
         Assertions.assertEquals(expected, actual);
     }
@@ -38,7 +38,23 @@ public class RadioTest {
         rad.setPrev();
 
         int actual = rad.getCurrentRadioStation();
-        //int expected = 0;
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "-2,0",
+            "-1,0",
+            "10,0",
+            "100,0"
+    })
+    void installRadioStation(int newCurrentRadioStation, int expected) {
+        Radio rad = new Radio();
+
+        rad.setCurrentRadioStation(newCurrentRadioStation);
+
+        int actual = rad.getCurrentRadioStation();
 
         Assertions.assertEquals(expected, actual);
     }
@@ -74,9 +90,24 @@ public class RadioTest {
         rad.decreaseVolume();
 
         int actual = rad.getCurrentVolume();
-        //int expected = 0;
 
         Assertions.assertEquals(expected, actual);
     }
 
+    @ParameterizedTest
+    @CsvSource({
+            "-2,0",
+            "-1,0",
+            "11,0",
+            "100,0"
+    })
+    void installVolume(int newCurrentVolume, int expected) {
+        Radio rad = new Radio();
+
+        rad.setCurrentVolume(newCurrentVolume);
+
+        int actual = rad.getCurrentVolume();
+
+        Assertions.assertEquals(expected, actual);
+    }
 }

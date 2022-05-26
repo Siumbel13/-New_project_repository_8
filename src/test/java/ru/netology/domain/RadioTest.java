@@ -1,7 +1,6 @@
 package ru.netology.domain;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -15,7 +14,7 @@ public class RadioTest {
             "9,0"
     })
     void nextRadioStation(int newCurrentRadioStation, int expected) {
-        Radio rad = new Radio();
+        Radio rad = new Radio(); // переключение на след.станцию
 
         rad.setCurrentRadioStation(newCurrentRadioStation);
         rad.setNext();
@@ -32,7 +31,7 @@ public class RadioTest {
             "9,8"
     })
     void prevRadioStation(int newCurrentRadioStation, int expected) {
-        Radio rad = new Radio();
+        Radio rad = new Radio();  // переключение на предыд.станцию
 
         rad.setCurrentRadioStation(newCurrentRadioStation);
         rad.setPrev();
@@ -46,11 +45,14 @@ public class RadioTest {
     @CsvSource({
             "-2,0",
             "-1,0",
+            "0,0",
+            "1,1",
+            "9,9",
             "10,0",
             "100,0"
     })
     void installRadioStation(int newCurrentRadioStation, int expected) {
-        Radio rad = new Radio();
+        Radio rad = new Radio();  // выставление номера радиостанции через прямое указание её номера
 
         rad.setCurrentRadioStation(newCurrentRadioStation);
 
@@ -66,13 +68,12 @@ public class RadioTest {
             "10,10"
     })
     void increaseCurrentVolume(int newCurrentVolume, int expected) {
-        Radio rad = new Radio();
+        Radio rad = new Radio(); // увеличение громкости звука на 1
 
         rad.setCurrentVolume(newCurrentVolume);
         rad.increaseVolume();
 
         int actual = rad.getCurrentVolume();
-        //int expected = 2;
 
         Assertions.assertEquals(expected, actual);
     }
@@ -84,7 +85,7 @@ public class RadioTest {
             "10,9"
     })
     void decreaseCurrentVolume(int newCurrentVolume, int expected) {
-        Radio rad = new Radio();
+        Radio rad = new Radio();  // уменьшение громкости звука на 1
 
         rad.setCurrentVolume(newCurrentVolume);
         rad.decreaseVolume();
@@ -102,7 +103,7 @@ public class RadioTest {
             "100,0"
     })
     void installVolume(int newCurrentVolume, int expected) {
-        Radio rad = new Radio();
+        Radio rad = new Radio(); // выставление громкости звука через прямое указание
 
         rad.setCurrentVolume(newCurrentVolume);
 

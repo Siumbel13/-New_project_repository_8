@@ -94,21 +94,4 @@ public class RadioTest {
 
         Assertions.assertEquals(expected, actual);
     }
-
-    @ParameterizedTest
-    @CsvSource({
-            "-2,0",
-            "-1,0",
-            "11,0",
-            "100,0"
-    })
-    void installVolume(int newCurrentVolume, int expected) {
-        Radio rad = new Radio(); // выставление громкости звука через прямое указание
-
-        rad.setCurrentVolume(newCurrentVolume);
-
-        int actual = rad.getCurrentVolume();
-
-        Assertions.assertEquals(expected, actual);
-    }
 }

@@ -1,10 +1,20 @@
 package ru.netology.domain;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 public class RadioTest {
+    Radio radStations = new Radio();
+    Radio radStations1 = new Radio(15);
+
+    @Test
+    void radioStations() {
+
+        Assertions.assertEquals(10, radStations.getAmountRadStations());
+        Assertions.assertEquals(15, radStations1.getAmountRadStations());
+    }
 
     @ParameterizedTest
     @CsvSource({
@@ -65,7 +75,8 @@ public class RadioTest {
     @CsvSource({
             "0,1",
             "1,2",
-            "10,10"
+            "99,100",
+            "100,100"
     })
     void increaseCurrentVolume(int newCurrentVolume, int expected) {
         Radio rad = new Radio(); // увеличение громкости звука на 1
@@ -82,7 +93,7 @@ public class RadioTest {
     @CsvSource({
             "0,0",
             "1,0",
-            "10,9"
+            "100,99"
     })
     void decreaseCurrentVolume(int newCurrentVolume, int expected) {
         Radio rad = new Radio();  // уменьшение громкости звука на 1

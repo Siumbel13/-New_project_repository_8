@@ -2,19 +2,20 @@ package ru.netology.domain;
 
 public class Radio {
 
-    private int AmountRadStations = 10;
+    private int amountRadStations;
     private int currentRadioStation;
     private int currentVolume;
 
-    public Radio(int AmountRadioStations) {
-        this.AmountRadStations = AmountRadioStations;
+    public Radio(int amountRadioStations) {
+        this.amountRadStations = amountRadioStations; // количество радиостанций задается пользователем
     }
 
     public Radio() {
+        amountRadStations = 10; // количество радиостанций по умолччанию 10
     }
 
     public int getAmountRadStations() {
-        return AmountRadStations;
+        return amountRadStations;
     }
 
     public int getCurrentRadioStation() {
@@ -22,7 +23,7 @@ public class Radio {
     }
 
     public void setCurrentRadioStation(int newCurrentRadioStation) {
-        if (newCurrentRadioStation > 9) {
+        if (newCurrentRadioStation > amountRadStations - 1) {
             return;
         }
         if (newCurrentRadioStation < 0) {
@@ -32,7 +33,7 @@ public class Radio {
     }
 
     public void setNext() {
-        if (currentRadioStation == 9) {
+        if (currentRadioStation == amountRadStations - 1) {
             currentRadioStation = 0;
         } else {
             currentRadioStation = currentRadioStation + 1;
@@ -41,7 +42,7 @@ public class Radio {
 
     public void setPrev() {
         if (currentRadioStation == 0) {
-            currentRadioStation = 9;
+            currentRadioStation = amountRadStations - 1;
         } else {
             currentRadioStation = currentRadioStation - 1;
         }

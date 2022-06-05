@@ -6,14 +6,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 public class RadioTest {
-    Radio radStations = new Radio();
-    Radio radStations1 = new Radio(15);
+    Radio rad = new Radio();
 
     @Test
     void radioStations() {
+        Radio rad1 = new Radio(20);
 
-        Assertions.assertEquals(10, radStations.getAmountRadStations());
-        Assertions.assertEquals(15, radStations1.getAmountRadStations());
+        Assertions.assertEquals(10, rad.getAmountRadStations());
+        Assertions.assertEquals(20, rad1.getAmountRadStations());
     }
 
     @ParameterizedTest
@@ -24,7 +24,7 @@ public class RadioTest {
             "9,0"
     })
     void nextRadioStation(int newCurrentRadioStation, int expected) {
-        Radio rad = new Radio(); // переключение на след.станцию
+        // переключение на след.станцию (по умлочанию кол-во радиостанций 10)
 
         rad.setCurrentRadioStation(newCurrentRadioStation);
         rad.setNext();
@@ -36,12 +36,30 @@ public class RadioTest {
 
     @ParameterizedTest
     @CsvSource({
+            "0,1",
+            "1,2",
+            "18,19",
+            "19,0"
+    })
+    void nextRadioStation1(int newCurrentRadioStation, int expected) {
+        Radio rad1 = new Radio(20); // переключение на след.станцию при количестве радио станций 20
+
+        rad1.setCurrentRadioStation(newCurrentRadioStation);
+        rad1.setNext();
+
+        int actual = rad1.getCurrentRadioStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
             "0,9",
             "1,0",
             "9,8"
     })
     void prevRadioStation(int newCurrentRadioStation, int expected) {
-        Radio rad = new Radio();  // переключение на предыд.станцию
+        // переключение на предыд.станцию
 
         rad.setCurrentRadioStation(newCurrentRadioStation);
         rad.setPrev();
@@ -62,11 +80,23 @@ public class RadioTest {
             "100,0"
     })
     void installRadioStation(int newCurrentRadioStation, int expected) {
-        Radio rad = new Radio();  // выставление номера радиостанции через прямое указание её номера
+        // выставление номера радиостанции через прямое указание её номера
 
         rad.setCurrentRadioStation(newCurrentRadioStation);
 
         int actual = rad.getCurrentRadioStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void installRadioStation1() {
+        Radio rad1 = new Radio(20);// выставление номера радиостанции через прямое указание её номера (при количестве радиостанций 20)
+
+        rad1.setCurrentRadioStation(15);
+
+        int actual = rad1.getCurrentRadioStation();
+        int expected = 15;
 
         Assertions.assertEquals(expected, actual);
     }
@@ -79,7 +109,7 @@ public class RadioTest {
             "100,100"
     })
     void increaseCurrentVolume(int newCurrentVolume, int expected) {
-        Radio rad = new Radio(); // увеличение громкости звука на 1
+        // увеличение громкости звука на 1
 
         rad.setCurrentVolume(newCurrentVolume);
         rad.increaseVolume();
@@ -96,7 +126,7 @@ public class RadioTest {
             "100,99"
     })
     void decreaseCurrentVolume(int newCurrentVolume, int expected) {
-        Radio rad = new Radio();  // уменьшение громкости звука на 1
+        // уменьшение громкости звука на 1
 
         rad.setCurrentVolume(newCurrentVolume);
         rad.decreaseVolume();
